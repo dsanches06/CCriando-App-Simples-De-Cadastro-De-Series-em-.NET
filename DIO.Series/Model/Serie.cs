@@ -29,7 +29,8 @@ namespace DIO.Series.Model
             str += "Género: " + this.Genero + Environment.NewLine;
             str += "Titulo: " + this.Titulo + Environment.NewLine;
             str += "Descrição: " + this.Descricao + Environment.NewLine;
-            str += "Ano: " + this.Ano;
+            str += "Ano: " + this.Ano + Environment.NewLine;
+            str += "Excluído: " + this.Excluido;
             return str;
         }
 
@@ -47,6 +48,11 @@ namespace DIO.Series.Model
         public void foiExcluido()
         {
             this.Excluido = true;
+        }
+
+        public bool GetExcluido()
+        {
+            return Excluido;
         }
     }
 }

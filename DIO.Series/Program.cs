@@ -57,7 +57,9 @@ namespace DIO.Series
 
             foreach (var serie in lista)
             {
-                Console.WriteLine($"#ID {serie.GetId()} - {serie.GetTitulo()}");
+                var excluido = serie.GetExcluido();
+                string mensagem = (excluido ? "*Excluido*" : "");
+                Console.WriteLine($"#ID {serie.GetId()} - {serie.GetTitulo()} {mensagem}");
             }
         }
 
@@ -70,7 +72,6 @@ namespace DIO.Series
                 Console.WriteLine($"{i}-{Enum.GetName(typeof(Genero), i)}");
             }
 
-            Console.WriteLine();
             Console.Write("Digite o Genero entre as opções acima: ");
             int entradaGenero = int.Parse(Console.ReadLine());
 
@@ -83,21 +84,20 @@ namespace DIO.Series
             Console.Write("Digite a Descrição da Série: ");
             string entradaDescricao = Console.ReadLine();
 
-            //cria um novo objeto da classe conta
+            //cria um novo objeto da classe serie
             Serie novaSerie = new Serie(Id: repositorio.ProximoId(),
                                         Genero: (Genero)entradaGenero,
                                         Titulo: entradaTitulo,
                                         Descricao: entradaDescricao,
                                         Ano: entradaAno);
-            //adiciona a lista de contas
-            repositorio.inserir(novaSerie);
 
+            //adiciona a lista de serie
+            repositorio.inserir(novaSerie);
         }
 
         private static void AtualizarSerie()
         {
             Console.WriteLine("--- Atualizar séries ---");
-            Console.WriteLine();
 
             Console.Write("Digite o Id da Série: ");
             int entradaId = int.Parse(Console.ReadLine());
@@ -119,13 +119,14 @@ namespace DIO.Series
             Console.Write("Digite a Descrição da Série: ");
             string entradaDescricao = Console.ReadLine();
 
-            //cria um novo objeto da classe conta
-            Serie novaSerie = new Serie(Id: repositorio.ProximoId(),
+            //cria um novo objeto da classe serie
+            Serie novaSerie = new Serie(Id: entradaId,
                                         Genero: (Genero)entradaGenero,
                                         Titulo: entradaTitulo,
                                         Descricao: entradaDescricao,
                                         Ano: entradaAno);
-            //adiciona a lista de contas
+
+            //atualiza os antigos para o novo inserido
             repositorio.Atualizar(entradaId, novaSerie);
         }
 
@@ -147,8 +148,8 @@ namespace DIO.Series
             Console.Write("Digite o Id da Série: ");
             int entradaId = int.Parse(Console.ReadLine());
 
-            Serie serie = repositorio.RetornaPorId(entradaId);
-            Console.WriteLine(serie.ToString());
+            var serie = repositorio.RetornaPorId(entradaId);
+            Console.WriteLine(serie);
         }
 
         private static string ObterOpcaoUsuario()
