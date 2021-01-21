@@ -7,35 +7,36 @@ namespace DIO.Series.Model
 {
     public class SerieRepositorio : IRepositorio<Serie>
     {
-        private List<Serie> listaSeriie = new List<Serie>();
+        private List<Serie> listaSerie = new List<Serie>();
 
         public List<Serie> Listar()
         {
-            return null;
+            return listaSerie;
         }
 
         public Serie RetornaPorId(int id)
         {
-            return null;
+            return listaSerie[id];
         }
 
         public void inserir(Serie entidade)
         {
-
+            listaSerie.Add(entidade);
         }
 
         public void Excluir(int id)
         {
-
+            listaSerie[id].foiExcluido();
         }
 
         public void Atualizar(int id, Serie entidade)
         {
+            listaSerie[id] = entidade;
         }
 
         public int ProximoId()
         {
-            return 0;
+            return listaSerie.Count;
         }
     }
 }
