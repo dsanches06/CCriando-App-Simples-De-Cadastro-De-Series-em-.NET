@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace DIO.Series.Model
+namespace DIO.Series.Model.Repositorio
 {
     public class SerieRepositorio : IRepositorio<Serie>
     {
